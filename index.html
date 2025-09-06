@@ -493,13 +493,21 @@
   </div>
 	
   <a href="https://moviereview20255.blogspot.com/" class="video-link next-page-button">NEXT</a>
- 
- <footer>
+ <script type="text/javascript">
+	atOptions = {
+		'key' : '4a2fc598ebbbdbc95eb3bef73798c939',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/4a2fc598ebbbdbc95eb3bef73798c939/invoke.js"></script>
+
+  <footer>
     <p>&copy; 2025 Videy.co. All rights reserved.</p>
-    <div id="secretMessage" class="hidden-css">This is a secret message, hidden by default.</div>
   </footer>
-	
-   <script>
+	<script>
     function setupProgressDots(galleryId, dotsId, interval = 5000) {
       const gallery = document.getElementById(galleryId);
       const figures = gallery.querySelectorAll("figure");
@@ -567,66 +575,25 @@
 
     setupProgressDots("gallery1", "dots1");
     setupProgressDots("gallery2", "dots2");
-    
-    const secretMessage = document.getElementById('secretMessage');
-    if (secretMessage) { // Check if the element exists to prevent errors
-      secretMessage.classList.add('hidden-css');
-    }
+    // Scroll reveal
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("active");
+      });
+    }, { threshold: 0.2 });
+    reveals.forEach(el => observer.observe(el));
 
-    
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-      console.log('Right-click prevented.'); // Optional: for debugging
+    // 🚫 Proteksi klik kanan & shortcut inspect
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("keydown", e => {
+      if (e.key === "F12") e.preventDefault();
+      if (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase())) e.preventDefault();
+      if (e.ctrlKey && ["U","S"].includes(e.key.toUpperCase())) e.preventDefault();
     });
-
-    
-    document.addEventListener('keydown', function(e) {
-      const forbiddenKeys = ['F12'];
-      const forbiddenCtrlShiftKeys = ['I', 'J', 'C']; // I for Inspect, J for Console, C for Elements
-      const forbiddenCtrlKeys = ['U', 'S']; // U for View Source, S for Save
-
-      
-      if (forbiddenKeys.includes(e.key)) {
-        e.preventDefault();
-        console.log(`${e.key} key prevented.`);
-      }
-
-      
-      if (e.ctrlKey && e.shiftKey && forbiddenCtrlShiftKeys.includes(e.key.toUpperCase())) {
-        e.preventDefault();
-        console.log(`Ctrl+Shift+${e.key.toUpperCase()} prevented.`);
-      }
-
-      
-      if (e.ctrlKey && forbiddenCtrlKeys.includes(e.key.toUpperCase())) {
-        e.preventDefault();
-        console.log(`Ctrl+${e.key.toUpperCase()} prevented.`);
-      }
-    });
-
-    
-    (function() {
-      var devtools = /devtool/i;
-      var checkStatus = function() {
-        if (devtools.test(function() {}.toString())) {
-          // This part only executes if dev tools are open in some browsers
-          console.warn("Hey! Looks like you're peeking. ??");
-          console.warn("Our content is meant to be enjoyed directly!");
-          // You could also redirect, or overlay content, but that can be annoying for users.
-        }
-      };
-      
-    })();
-	   
-    function scrollGallery(direction) {
-      const gallery = document.getElementById("gallery");
-      const scrollAmount = 300;
-      gallery.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-    }
   </script>
 </body>
 </html>
-
 <!-- Histats.com  START  (aync)-->
 <script type="text/javascript">var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,4573229,4,0,0,0,00010000']);
