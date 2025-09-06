@@ -3,30 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Videy+ Showcase</title>
+  <title>Videy+</title>
   <style>
     :root {
-      --bg-dark: #000000;
-      --accent: #E50914;
-      --text: #ffffff;
+      --bg-color: #000000;
+      --card-bg-color: #ffffff;
+      --text-color: #E50914;
+      --link-color: #E50914;
     }
 
-    /* Background animasi */
     body {
-      margin: 0;
+      background-color: var(--bg-color);
       font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #000, #111, #1a1a1a, #000);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: var(--text);
-    }
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
     }
 
-    /* Header */
     header {
       background: rgba(0,0,0,0.9);
       padding: 1rem 2rem;
@@ -34,87 +27,104 @@
       top: 0;
       z-index: 1000;
     }
-    header .logo {
+
+    .logo {
       font-size: 2rem;
       font-weight: 900;
-      color: var(--accent);
-      letter-spacing: 2px;
+      color: var(--link-color);
     }
 
     h2 {
-      margin: 2rem 1rem 1rem;
-      font-size: 1.5rem;
-      color: var(--accent);
+      font-size: 1.6rem;
+      margin: 1rem;
+      color: #fff;
     }
 
-    /* Gallery wrapper */
     .gallery-wrapper {
       position: relative;
       overflow: hidden;
-      margin-bottom: 3rem;
+      margin: 1.5rem 0;
     }
 
     .gallery-container {
       display: flex;
       gap: 1rem;
-      overflow-x: auto;
+      overflow-x: hidden;
       scroll-behavior: smooth;
       padding: 1rem;
-      scroll-snap-type: x mandatory;
-    }
-    .gallery-container::-webkit-scrollbar {
-      display: none;
     }
 
-    /* Card */
     figure {
-      flex: 0 0 220px;
-      margin: 0;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-      background: #111;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s forwards;
+      background-color: var(--card-bg-color);
+      border-radius: 12px;
+      padding: 1rem;
+      min-width: 220px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
     }
-    figure:nth-child(1){animation-delay:0.2s;}
-    figure:nth-child(2){animation-delay:0.4s;}
-    figure:nth-child(3){animation-delay:0.6s;}
-    figure:nth-child(4){animation-delay:0.8s;}
 
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    figure:hover {
+      transform: translateY(-5px) scale(1.05);
     }
 
     figure img {
       width: 100%;
-      height: 300px;
+      height: 180px;
       object-fit: cover;
-      display: block;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
     }
 
-    /* Overlay info */
-    .overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      padding: 0.5rem;
-      font-size: 0.9rem;
-      opacity: 0;
-      transform: translateY(100%);
-      transition: all 0.3s ease;
+    figure img:hover {
+      transform: scale(1.08);
     }
-    figure:hover .overlay {
-      opacity: 1;
-      transform: translateY(0);
+
+    figcaption {
+      text-align: center;
+      color: #000;
+      font-weight: 600;
+      margin: 0.5rem 0;
+    }
+
+    .video-link {
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #e50914, #ff4d4d);
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Dots wrapper */
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .dot {
+      width: 40px;
+      height: 4px;
+      background: #333;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .dot .progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--link-color);
+      transition: width linear;
     }
 
     /* Nav buttons */
@@ -129,73 +139,16 @@
       padding: 0.5rem 1rem;
       cursor: pointer;
       border-radius: 50%;
-      z-index: 5;
       transition: background 0.3s;
+      z-index: 5;
     }
-    .nav-btn:hover { background: rgba(255,255,255,0.3); }
+
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
     .nav-btn.left { left: 10px; }
     .nav-btn.right { right: 10px; }
-
-    /* Dots */
-    .dots {
-      text-align: center;
-      margin-top: 0.5rem;
-    }
-    .dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin: 0 5px;
-      background: #444;
-      border-radius: 50%;
-      position: relative;
-      overflow: hidden;
-    }
-    .dot.active::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      background: var(--accent);
-      animation: progress 5s linear forwards;
-    }
-    @keyframes progress {
-      from {width: 0;}
-      to {width: 100%;}
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      figure {flex: 0 0 45%;}
-    }
-    @media (max-width: 600px) {
-      figure {flex: 0 0 90%;}
-    }
-
-    footer {
-      background: #000;
-      text-align: center;
-      padding: 1rem;
-      position: relative;
-      color: #888;
-    }
-    footer::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #e50914, transparent);
-      animation: glow 3s linear infinite;
-    }
-    @keyframes glow {
-      0% {opacity: 0;}
-      50% {opacity: 1;}
-      100% {opacity: 0;}
-    }
         footer {
             margin-top: auto;
             padding: 1rem;
@@ -350,7 +303,8 @@
                 <meta itemprop="uploadDate" content="2025-08-27" />
                 <link itemprop="contentUrl" href="https://ashvili99-byte.github.io/sLx7vw9k1.mp4/" /> <a href="https://ashvili99-byte.github.io/sLx7vw9k1.mp4/" class="video-link" aria-label="Watch video: This is the first time">Play</a>
             </figure>
-        <button class="nav-btn right" onclick="scrollGallery(this, 1)">&#10095;</button>
+        </div>
+    <button class="nav-btn right" onclick="scrollGallery(this, 1)">&#10095;</button>
   <div class="dots">
     <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
   </div>
@@ -486,6 +440,7 @@
                 <meta itemprop="uploadDate" content="2025-08-27" />
                 <link itemprop="contentUrl" href="https://ashvili99-byte.github.io/XNWSxUBm1.mp4/" /> <a href="https://ashvili99-byte.github.io/XNWSxUBm1.mp4/" class="video-link" aria-label="Watch video: I'm in your dreams">Play</a>
             </figure>
+      </div>
         <button class="nav-btn right" onclick="scrollGallery(this, 1)">&#10095;</button>
   <div class="dots">
     <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
