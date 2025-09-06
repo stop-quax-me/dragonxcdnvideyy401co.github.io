@@ -1,116 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Videy+ Showcase</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Videy+</title>
   <style>
     :root {
-      --bg-dark: #000000;
-      --accent: #E50914;
-      --text: #ffffff;
+      --red: #e50914;
+      --dark-bg: #000;
+      --card-height: 260px;
+      --card-width: 180px;
     }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #000, #111, #1a1a1a, #000);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: var(--text);
-    }
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      background: linear-gradient(135deg, #000 0%, #141414 100%);
+      color: white;
+      overflow-x: hidden;
     }
 
     header {
-      background: rgba(0,0,0,0.9);
       padding: 1rem 2rem;
+      background: rgba(0, 0, 0, 0.9);
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 10;
     }
-    header .logo {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: 2px;
+    header h1 {
+      color: var(--red);
+      margin: 0;
+      font-size: 1.8rem;
     }
 
-    h2 {
-      margin: 2rem 1rem 1rem;
-      font-size: 1.5rem;
-      color: var(--accent);
+    section {
+      margin: 2rem 0;
+    }
+    section h2 {
+      margin: 0 1.5rem 1rem;
+      font-size: 1.4rem;
+      font-weight: bold;
     }
 
     .gallery-wrapper {
       position: relative;
       overflow: hidden;
-      margin-bottom: 3rem;
     }
     .gallery-container {
       display: flex;
       gap: 1rem;
-      overflow-x: hidden;
-      padding: 1rem;
+      padding: 0 2rem;
+      transition: transform 0.6s ease;
+      will-change: transform;
     }
 
-    figure {
-      flex: 0 0 220px;
-      margin: 0;
+    .card {
+      flex: 0 0 var(--card-width);
+      height: var(--card-height);
+      background: #111;
       border-radius: 10px;
       overflow: hidden;
       position: relative;
-      background: #111;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
       cursor: pointer;
+      transition: transform 0.3s ease;
     }
-    figure:hover {
-      transform: scale(1.07);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+    .card:hover {
+      transform: scale(1.08);
+      z-index: 5;
     }
 
-    figure img,
-    figure video {
+    .card img, 
+    .card video {
       width: 100%;
-      height: 300px;
+      height: 100%;
       object-fit: cover;
       display: block;
-      transition: opacity 0.5s ease;
     }
-    figure video {
+
+    .card video {
       position: absolute;
       top: 0; left: 0;
       opacity: 0;
+      transition: opacity 0.4s ease;
       pointer-events: none;
     }
-    figure:hover img {
-      opacity: 0;
-    }
-    figure:hover video {
+    .card:hover video {
       opacity: 1;
     }
 
-    .overlay {
+    .card .overlay {
       position: absolute;
       bottom: 0;
-      left: 0; right: 0;
-      background: rgba(0,0,0,0.7);
-      color: #fff;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      color: white;
       padding: 0.5rem;
       font-size: 0.9rem;
-      opacity: 0;
-      transform: translateY(100%);
-      transition: all 0.3s ease;
-    }
-    figure:hover .overlay {
-      opacity: 1;
-      transform: translateY(0);
     }
 
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card:hover .play-btn {
+      opacity: 1;
+    }
+
+    /* Nav arrows */
     .nav-btn {
       position: absolute;
       top: 50%;
@@ -122,83 +133,49 @@
       padding: 0.5rem 1rem;
       cursor: pointer;
       border-radius: 50%;
-      z-index: 5;
-      transition: background 0.3s, transform 0.2s;
+      z-index: 10;
     }
     .nav-btn:hover {
       background: rgba(255,255,255,0.3);
-      transform: scale(1.1);
     }
-    .nav-btn.left { left: 10px; }
-    .nav-btn.right { right: 10px; }
+    .nav-btn.left { left: 5px; }
+    .nav-btn.right { right: 5px; }
 
+    /* Dots progress */
     .dots {
       text-align: center;
-      margin-top: 0.5rem;
+      margin-top: 10px;
     }
     .dot {
       display: inline-block;
       width: 10px;
       height: 10px;
-      margin: 0 5px;
-      background: #444;
+      margin: 0 4px;
       border-radius: 50%;
-      position: relative;
+      background: #555;
       overflow: hidden;
-    }
-    .dot.active::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      height: 100%;
-      background: var(--accent);
-      animation: progress 5s linear forwards;
-    }
-    @keyframes progress {
-      from {width: 0;}
-      to {width: 100%;}
-    }
-
-    @media (max-width: 900px) { figure {flex: 0 0 45%;} }
-    @media (max-width: 600px) { figure {flex: 0 0 90%;} }
-
-    .next-page-button {
-      display: inline-block;
-      margin: 2rem auto;
-      padding: 0.75rem 2rem;
-      background: linear-gradient(135deg, #e50914, #ff4d4d);
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 30px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .next-page-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px #e50914;
-    }
-
-    footer {
-      background: #000;
-      text-align: center;
-      padding: 1rem;
       position: relative;
-      color: #888;
     }
-    footer::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #e50914, transparent);
-      animation: glow 3s linear infinite;
+    .dot.active {
+      background: #999;
     }
-    @keyframes glow {
-      0% {opacity: 0;}
-      50% {opacity: 1;}
-      100% {opacity: 0;}
+    .dot span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--red);
+      transition: width 3s linear;
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --card-width: 45vw;
+      }
+    }
+    @media (max-width: 480px) {
+      :root {
+        --card-width: 80vw;
+      }
     }
 	  footer {
       margin-top: auto;
@@ -235,10 +212,12 @@
     <div class="logo">Videy+</div>
   </header>
   <!-- Gallery 1 -->
-  <h2>Trending Now</h2>
-  <div class="gallery-wrapper">
-    <button class="nav-btn left" onclick="scrollGallery('gallery1', -1)">&#10094;</button>
-    <div class="gallery-container" id="gallery1">
+  <section class="gallery-section">
+    <h2>Trending Now</h2>
+    <div class="gallery-wrapper" data-gallery>
+      <button class="nav-btn left">&#10094;</button>
+      <div class="gallery-container">
+        <div class="card">
       <figure itemscope itemtype="http://schema.org/VideoObject">
         <img src="a.jpg" alt="One of my favorite clips" itemprop="thumbnailUrl" loading="lazy" width="280" height="180" />
         <figcaption itemprop="name">One of my favorite clips</figcaption>
@@ -391,14 +370,17 @@
         <a href="https://ashvili99-byte.github.io/sLx7vw9k1.mp4/" class="video-link" aria-label="Watch video: This is the first time">Play</a>
      </figure>
 		</div>
- <button class="nav-btn right" onclick="scrollGallery(this, 1)">&#10095;</button>
-  <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
-</div>
+ <button class="nav-btn right">&#10095;</button>
+      <div class="dots"></div>
+    </div>
+  </section>
 	
-<h2>Recommended for You</h2>
-  <div class="gallery-wrapper">
-    <button class="nav-btn left" onclick="scrollGallery('gallery2', -1)">&#10094;</button>
-    <div class="gallery-container" id="gallery2">
+<section class="gallery-section">
+    <h2>Recommended for You</h2>
+    <div class="gallery-wrapper" data-gallery>
+      <button class="nav-btn left">&#10094;</button>
+      <div class="gallery-container">
+        <div class="card">
     <figure itemscope itemtype="http://schema.org/VideoObject">
         <img src="t.jpg" alt="enough to make you weak" itemprop="thumbnailUrl" loading="lazy" width="280" height="180" />
         <figcaption itemprop="name">enough to make you weak</figcaption>
@@ -567,9 +549,10 @@
         <a href="https://ashvili99-byte.github.io/XNWSxUBm1.mp4/" class="video-link" aria-label="Watch video: I'm in your dreams">Play</a>
     </figure>
     </div>
-  <button class="nav-btn right" onclick="scrollGallery(this, 1)">&#10095;</button>
-  <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
-</div>
+ <button class="nav-btn right">&#10095;</button>
+      <div class="dots"></div>
+    </div>
+  </section>
 	
   <!-- Tombol NEXT -->
 <div style="text-align:center;">
@@ -594,69 +577,66 @@
   </footer>
 	</div>
 	<script>
-function scrollGallery(btn, dir) {
-  const wrapper = btn.closest(".gallery-wrapper");
-  const container = wrapper.querySelector(".gallery-container");
-  const cardWidth = container.querySelector("figure").offsetWidth + 16;
-  container.scrollBy({ left: dir * cardWidth, behavior: "smooth" });
-}
+    document.querySelectorAll("[data-gallery]").forEach(gallery => {
+      const container = gallery.querySelector(".gallery-container");
+      const dotsContainer = gallery.querySelector(".dots");
+      const cards = container.children;
+      const total = cards.length;
+      let index = 0;
+      let interval;
 
-function initCarousel(wrapper) {
-  const container = wrapper.querySelector(".gallery-container");
-  const dots = wrapper.querySelectorAll(".dot");
-  const cards = container.querySelectorAll("figure");
-  let index = 0;
-  let interval;
+      // Create dots
+      for (let i=0;i<total;i++) {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        const span = document.createElement("span");
+        dot.appendChild(span);
+        dotsContainer.appendChild(dot);
+      }
+      const dots = dotsContainer.querySelectorAll(".dot");
 
-  function showSlide(i) {
-    index = (i + cards.length) % cards.length;
-    const cardWidth = cards[0].offsetWidth + 16;
-    container.scrollTo({ left: index * cardWidth, behavior: "smooth" });
-    dots.forEach(d => d.classList.remove("active"));
-    if (dots[index]) dots[index].classList.add("active");
-  }
+      function updateDots() {
+        dots.forEach((d,i) => {
+          d.classList.toggle("active", i === index);
+          d.querySelector("span").style.width = i===index ? "100%" : "0%";
+        });
+      }
 
-  function nextSlide() { showSlide(index + 1); }
-  function prevSlide() { showSlide(index - 1); }
+      function goTo(i) {
+        index = (i+total)%total; // infinite looping
+        container.style.transform = `translateX(${-index * (cards[0].offsetWidth+16)}px)`;
+        updateDots();
+      }
 
-  function startAuto() { interval = setInterval(nextSlide, 5000); }
-  function stopAuto() { clearInterval(interval); }
+      function next() { goTo(index+1); }
+      function prev() { goTo(index-1); }
 
-  showSlide(index);
-  startAuto();
+      gallery.querySelector(".nav-btn.left").onclick = prev;
+      gallery.querySelector(".nav-btn.right").onclick = next;
 
-  wrapper.addEventListener("mouseenter", stopAuto);
-  wrapper.addEventListener("mouseleave", startAuto);
+      function startAuto() {
+        stopAuto();
+        interval = setInterval(next, 3000);
+      }
+      function stopAuto() {
+        clearInterval(interval);
+      }
 
-  // swipe mobile
-  let startX = 0;
-  container.addEventListener("touchstart", e => { startX = e.touches[0].clientX; stopAuto(); });
-  container.addEventListener("touchend", e => {
-    let endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) nextSlide();
-    else if (endX - startX > 50) prevSlide();
-    startAuto();
-  });
+      gallery.addEventListener("mouseenter", stopAuto);
+      gallery.addEventListener("mouseleave", startAuto);
 
-  // Hover preview video
-  cards.forEach(card => {
-    const video = card.querySelector("video");
-    card.addEventListener("mouseenter", () => {
-      video.currentTime = 0;
-      video.play();
+      // swipe support
+      let startX=0;
+      container.addEventListener("touchstart", e=> startX = e.touches[0].clientX);
+      container.addEventListener("touchend", e=>{
+        let dx = e.changedTouches[0].clientX - startX;
+        if(dx>50) prev();
+        else if(dx<-50) next();
+      });
+
+      goTo(0);
+      startAuto();
     });
-    card.addEventListener("mouseleave", () => {
-      video.pause();
-    });
-    // Mobile: tap to toggle preview
-    card.addEventListener("click", () => {
-      if (video.paused) { video.currentTime = 0; video.play(); }
-      else { video.pause(); }
-    });
-  });
-}
-
-document.querySelectorAll(".gallery-wrapper").forEach(initCarousel);
 	
     // Scroll reveal
     const reveals = document.querySelectorAll(".reveal");
