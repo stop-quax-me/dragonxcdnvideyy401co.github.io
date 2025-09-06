@@ -1,41 +1,28 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Videy.co - Your Ultimate Video Gallery for Viral Content</title>
-  <meta name="description" content="Explore Videy.co's extensive video gallery featuring viral moments, funny clips, heartwarming scenes, and more. Your go-to source for captivating video content." />
-  <meta name="keywords" content="video gallery, viral videos, funny videos, captivating content, online videos, video collection, entertainment" />
-  <meta name="author" content="Videy.co Team" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://vdyceo678y.github.io/" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Videy+</title>
   <style>
     :root {
       --bg-color: #000000;
       --card-bg-color: #ffffff;
       --text-color: #E50914;
       --link-color: #E50914;
-      --link-hover-color: #E50914;
-      --shadow-light: rgba(0, 0, 0, 0.08);
-      --shadow-heavy: rgba(0, 0, 0, 0.15);
     }
 
     body {
       background-color: var(--bg-color);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: Arial, sans-serif;
       color: var(--text-color);
       margin: 0;
       padding: 0;
-      line-height: 1.6;
     }
 
     header {
       background: rgba(0,0,0,0.9);
       padding: 1rem 2rem;
-      text-align: left;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -45,157 +32,111 @@
       font-size: 2rem;
       font-weight: 900;
       color: var(--link-color);
-      letter-spacing: 2px;
     }
 
-    h1 {
-      font-size: clamp(0.9rem, 4.5vw, 2.5rem); 
-      color: var(--link-color);
-      margin: 2rem 0;
-      text-shadow: 1px 1px 3px var(--shadow-light);
-      text-align: center;
+    h2 {
+      font-size: 1.6rem;
+      margin: 1rem;
+      color: #fff;
     }
 
     .gallery-wrapper {
       position: relative;
       overflow: hidden;
-      margin: 2rem 0;
+      margin: 1.5rem 0;
     }
 
     .gallery-container {
       display: flex;
-      gap: 1.5rem;
-      overflow-x: auto;
+      gap: 1rem;
+      overflow-x: hidden;
       scroll-behavior: smooth;
       padding: 1rem;
     }
 
-    .gallery-container::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Nav Buttons */
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.6);
-      border: none;
-      color: white;
-      font-size: 2rem;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      border-radius: 50%;
-      transition: background 0.3s;
-      z-index: 5;
-    }
-
-    .nav-btn:hover {
-      background: rgba(255,255,255,0.3);
-    }
-
-    .nav-btn.left { left: 10px; }
-    .nav-btn.right { right: 10px; }
-
     figure {
       background-color: var(--card-bg-color);
-      padding: 1rem;
       border-radius: 12px;
-      box-shadow: 0 4px 10px var(--shadow-light);
-      margin: 0;
+      padding: 1rem;
+      min-width: 220px;
+      height: 300px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 320px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      min-width: 200px;
+      transition: transform 0.3s ease;
     }
 
     figure:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px var(--shadow-heavy);
+      transform: translateY(-5px) scale(1.05);
     }
 
     figure img {
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: cover;
       border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    figure img:hover {
+      transform: scale(1.08);
     }
 
     figcaption {
-      flex-grow: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       text-align: center;
+      color: #000;
       font-weight: 600;
-      font-size: 0.9rem;
       margin: 0.5rem 0;
     }
 
     .video-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.75rem 1.5rem;
+      padding: 0.5rem 1rem;
       background: linear-gradient(135deg, #e50914, #ff4d4d);
       color: #fff;
+      border-radius: 30px;
       text-decoration: none;
-      font-size: clamp(0.9rem, 3vw, 1rem);
-      font-weight: 700;
-      border-radius: 50px;
-      position: relative;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Dots wrapper */
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .dot {
+      width: 40px;
+      height: 4px;
+      background: #333;
+      border-radius: 2px;
       overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      margin-top: auto;
+      cursor: pointer;
+      position: relative;
     }
 
-    .video-link::before {
-      content: "";
+    .dot .progress {
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.3) 20%, transparent 60%);
-      transform: scale(0);
-      transition: transform 0.4s ease;
-      border-radius: 50%;
-    }
-
-    .video-link:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    }
-
-    .video-link:hover::before {
-      transform: scale(1);
-    }
-
-    .video-link:active {
-      transform: scale(0.95);
-    }
-
-    @media (min-width: 768px) {
-      .gallery-container {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      .video-link {
-        width: auto;
-      }
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--link-color);
+      transition: width linear;
     }
   </style>
 </head>
-	<script type='text/javascript' src='//pl25360387.profitableratecpm.com/dd/2b/42/dd2b42b09a77c8efe6fdff35fbfbc733.js'></script>
 <body>
-  <header class="header">
-  <div class="logo">Videy+</div>
-</header>
-  <main>
-<div class="gallery-wrapper">
-  <button class="nav-btn left" onclick="scrollGallery(-1)">&#10094;</button>
-  <div class="gallery-container" id="gallery">
+  <header>
+    <div class="logo">Videy+</div>
+  </header>
+
+  <!-- Gallery 1 -->
+  <h2>Trending Now</h2>
+  <div class="gallery-wrapper">
+    <div class="gallery-container" id="gallery1">
       <figure itemscope itemtype="http://schema.org/VideoObject">
         <img src="a.jpg" alt="One of my favorite clips" itemprop="thumbnailUrl" loading="lazy" width="280" height="180" />
         <figcaption itemprop="name">One of my favorite clips</figcaption>
@@ -346,8 +287,14 @@
         <meta itemprop="description" content="A heartwarming clip of a baby's joyful smile, perfect for sharing." />
         <meta itemprop="uploadDate" content="2025-08-27" /> <link itemprop="contentUrl" href="https://ashvili99-byte.github.io/sLx7vw9k1.mp4/" />
         <a href="https://ashvili99-byte.github.io/sLx7vw9k1.mp4/" class="video-link" aria-label="Watch video: This is the first time">Play</a>
-    </figure>
-
+     </figure>
+		</div>
+ <div class="dots" id="dots1"></div>
+</div>
+<!-- Gallery 2 -->
+  <h2>Recommended for You</h2>
+  <div class="gallery-wrapper">
+    <div class="gallery-container" id="gallery2">
     <figure itemscope itemtype="http://schema.org/VideoObject">
         <img src="t.jpg" alt="enough to make you weak" itemprop="thumbnailUrl" loading="lazy" width="280" height="180" />
         <figcaption itemprop="name">enough to make you weak</figcaption>
@@ -515,9 +462,9 @@
         <meta itemprop="uploadDate" content="2025-08-27" /> <link itemprop="contentUrl" href="https://ashvili99-byte.github.io/XNWSxUBm1.mp4/" />
         <a href="https://ashvili99-byte.github.io/XNWSxUBm1.mp4/" class="video-link" aria-label="Watch video: I'm in your dreams">Play</a>
     </figure>
-      
-    <button class="nav-btn right" onclick="scrollGallery(1)">&#10095;</button>
-</div>
+    </div>
+    <div class="dots" id="dots2"></div>
+  </div>
   </main>
   
   <a href="https://moviereview20255.blogspot.com/" class="video-link next-page-button">NEXT</a>
@@ -526,8 +473,67 @@
     <p>&copy; 2025 Videy.co. All rights reserved.</p>
     <div id="secretMessage" class="hidden-css">This is a secret message, hidden by default.</div>
   </footer>
+   <script>
+    function setupProgressDots(galleryId, dotsId, interval = 5000) {
+      const gallery = document.getElementById(galleryId);
+      const figures = gallery.querySelectorAll("figure");
+      const dotsContainer = document.getElementById(dotsId);
 
-  <script>
+      let currentIndex = 0;
+      let timer;
+
+      // buat dot sesuai jumlah slide
+      figures.forEach((_, i) => {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        const progress = document.createElement("div");
+        progress.classList.add("progress");
+        dot.appendChild(progress);
+
+        dot.addEventListener("click", () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = dotsContainer.querySelectorAll(".dot .progress");
+
+      function goToSlide(index) {
+        currentIndex = index;
+        gallery.scrollTo({ left: figures[index].offsetLeft, behavior: "smooth" });
+        resetProgress();
+        restartTimer();
+      }
+
+      function resetProgress() {
+        dots.forEach(p => {
+          p.style.transition = "none";
+          p.style.width = "0%";
+        });
+        void dots[currentIndex].offsetWidth; // force reflow
+        dots[currentIndex].style.transition = `width ${interval}ms linear`;
+        dots[currentIndex].style.width = "100%";
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % figures.length;
+        gallery.scrollTo({ left: figures[currentIndex].offsetLeft, behavior: "smooth" });
+        resetProgress();
+      }
+
+      function restartTimer() {
+        clearInterval(timer);
+        timer = setInterval(nextSlide, interval);
+      }
+
+      function startAutoPlay() {
+        resetProgress();
+        timer = setInterval(nextSlide, interval);
+      }
+
+      startAutoPlay();
+    }
+
+    setupProgressDots("gallery1", "dots1");
+    setupProgressDots("gallery2", "dots2");
     
     const secretMessage = document.getElementById('secretMessage');
     if (secretMessage) { // Check if the element exists to prevent errors
@@ -578,9 +584,7 @@
       };
       
     })();
-
-  </script>
-<script>
+	   
     function scrollGallery(direction) {
       const gallery = document.getElementById("gallery");
       const scrollAmount = 300;
@@ -589,7 +593,6 @@
   </script>
 </body>
 </html>
-
 
 <!-- Histats.com  START  (aync)-->
 <script type="text/javascript">var _Hasync= _Hasync|| [];
