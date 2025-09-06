@@ -149,8 +149,27 @@
 
     .nav-btn.left { left: 10px; }
     .nav-btn.right { right: 10px; }
+	  
+  footer {
+      margin-top: auto;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
+	<script type='text/javascript' src='//pl25360387.profitableratecpm.com/dd/2b/42/dd2b42b09a77c8efe6fdff35fbfbc733.js'></script>
 <body>
   <header>
     <div class="logo">Videy+</div>
@@ -575,6 +594,7 @@
 
     setupProgressDots("gallery1", "dots1");
     setupProgressDots("gallery2", "dots2");
+		
     // Scroll reveal
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(entries => {
