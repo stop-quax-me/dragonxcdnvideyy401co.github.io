@@ -14,7 +14,6 @@
 
   <style>
     :root {
-      
       --bg-color: #000000;
       --card-bg-color: #ffffff;
       --text-color: #E50914;
@@ -23,80 +22,81 @@
       --shadow-light: rgba(0, 0, 0, 0.08);
       --shadow-heavy: rgba(0, 0, 0, 0.15);
     }
-	header {
-       background: rgba(0,0,0,0.9);
-       padding: 1rem 2rem;
-       text-align: left;
-       position: sticky;
-       top: 0;
-      z-index: 1000;
-     }
-	  
-    logo {
-          font-size: 2rem;
-          font-weight: 900;
-          color: var(--link-color);
-          letter-spacing: 2px;
-       }
+
     body {
       background-color: var(--bg-color);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       color: var(--text-color);
-      text-align: center;
-      padding: 0.5rem 1rem;
       margin: 0;
+      padding: 0;
       line-height: 1.6;
+    }
+
+    header {
+      background: rgba(0,0,0,0.9);
+      padding: 1rem 2rem;
+      text-align: left;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--link-color);
+      letter-spacing: 2px;
     }
 
     h1 {
       font-size: clamp(0.9rem, 4.5vw, 2.5rem); 
       color: var(--link-color);
-      margin-bottom: 2rem;
+      margin: 2rem 0;
       text-shadow: 1px 1px 3px var(--shadow-light);
-      white-space: nowrap; 
+      text-align: center;
     }
 
-.gallery-wrapper {
-     position: relative;
-     overflow: hidden;
-     margin: 2rem 0;
-}
+    .gallery-wrapper {
+      position: relative;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
 
-.gallery-container {
-    display: flex; /* ubah grid jadi flex untuk scroll horizontal */
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 1rem;
-  }
+    .gallery-container {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 1rem;
+    }
 
-.gallery-container::-webkit-scrollbar {
-display: none; /* sembunyikan scrollbar */
-}
+    .gallery-container::-webkit-scrollbar {
+      display: none;
+    }
 
-/* Nav Buttons */
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.6);
-  border: none;
-  color: white;
-  font-size: 2rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background 0.3s;
-  z-index: 5;
-}
+    /* Nav Buttons */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s;
+      z-index: 5;
+    }
 
-.nav-btn:hover {
-  background: rgba(255,255,255,0.3);
-}
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
 
-.nav-btn.left { left: 10px; }
-.nav-btn.right { right: 10px; }
-	  
+    .nav-btn.left { left: 10px; }
+    .nav-btn.right { right: 10px; }
+
     figure {
       background-color: var(--card-bg-color);
       padding: 1rem;
@@ -106,8 +106,9 @@ display: none; /* sembunyikan scrollbar */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100%;
+      height: 320px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-width: 200px;
     }
 
     figure:hover {
@@ -115,66 +116,67 @@ display: none; /* sembunyikan scrollbar */
       box-shadow: 0 8px 16px var(--shadow-heavy);
     }
 
-    img {
-      display: block;
-      margin: 0 auto;
+    figure img {
       width: 100%;
-      height: 100%;
+      height: 200px;
+      object-fit: cover;
       border-radius: 8px;
     }
 
     figcaption {
-      margin-top: 0.5rem;
-      margin-bottom: 0.25rem;
-      font-size: clamp(0.7rem, 2vw, 1rem);
-      font-weight: 600;
-      color: var(--text-color);
       flex-grow: 1;
-      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
     }
 
     .video-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #e50914, #ff4d4d);
-    color: #fff;
-    text-decoration: none;
-    font-size: clamp(0.9rem, 3vw, 1rem);
-    font-weight: 700;
-    border-radius: 50px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, #e50914, #ff4d4d);
+      color: #fff;
+      text-decoration: none;
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      font-weight: 700;
+      border-radius: 50px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      margin-top: auto;
+    }
 
-  .video-link::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.3) 20%, transparent 60%);
-    transform: scale(0);
-    transition: transform 0.4s ease;
-    border-radius: 50%;
-  }
+    .video-link::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 20%, transparent 60%);
+      transform: scale(0);
+      transition: transform 0.4s ease;
+      border-radius: 50%;
+    }
 
-  .video-link:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-  }
+    .video-link:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
 
-  .video-link:hover::before {
-    transform: scale(1);
-  }
+    .video-link:hover::before {
+      transform: scale(1);
+    }
 
-  .video-link:active {
-    transform: scale(0.95);
-  }
-    
+    .video-link:active {
+      transform: scale(0.95);
+    }
+
     @media (min-width: 768px) {
       .gallery-container {
         grid-template-columns: repeat(4, 1fr);
@@ -182,11 +184,6 @@ display: none; /* sembunyikan scrollbar */
       .video-link {
         width: auto;
       }
-    }
-
-    
-    .hidden-css {
-      display: none !important; 
     }
   </style>
 </head>
@@ -584,12 +581,12 @@ display: none; /* sembunyikan scrollbar */
 
   </script>
 <script>
-  function scrollGallery(direction) {
-    const gallery = document.getElementById("gallery");
-    const scrollAmount = 300; // jarak scroll per klik
-    gallery.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-  }
-</script>
+    function scrollGallery(direction) {
+      const gallery = document.getElementById("gallery");
+      const scrollAmount = 300;
+      gallery.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
 
