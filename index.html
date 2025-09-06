@@ -6,21 +6,24 @@
   <title>Videy+</title>
   <style>
     :root {
-      --bg-color: #221f1f;
-      --card-bg-color: #221f1f;
+      --bg-color: #000000;
+      --card-bg-color: #000000;
       --text-color: #E50914;
       --link-color: #E50914;
     }
 
-    body {
-      background-color: var(--bg-color);
-      font-family: Arial, sans-serif;
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-    }
+  .body {
+  background: linear-gradient(-45deg, #000000, #141414, #1a1a1a, #000000);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
 
-    header {
+    .header {
       background: rgba(0,0,0,0.9);
       padding: 1rem 2rem;
       position: sticky;
@@ -55,20 +58,26 @@
     }
 
     figure {
-      background-color: var(--card-bg-color);
-      border-radius: 12px;
-      padding: 1rem;
-      min-width: 220px;
-      height: 300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s ease;
-    }
-
-    figure:hover {
-      transform: translateY(-5px) scale(1.05);
-    }
+      position: relative;
+      overflow: hidden;
+   }
+figure .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+}
+figure:hover .overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
 
     figure img {
       width: 100%;
@@ -149,6 +158,12 @@
 
     .nav-btn.left { left: 10px; }
     .nav-btn.right { right: 10px; }
+     /* Bounce effect muncul */
+    @keyframes fadeInBounce {
+      0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+      60% { opacity: 1; transform: translateY(-10px) scale(1.05); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
     
         footer {
             margin-top: auto;
@@ -168,6 +183,33 @@
             opacity: 1;
             transform: translateY(0);
         }
+    /* Default: Desktop */
+.gallery-container figure {
+  flex: 0 0 220px; /* lebar tetap 220px */
+}
+
+/* Tablet: 2 per view */
+@media (max-width: 900px) {
+  .gallery-container figure {
+    flex: 0 0 45%; /* 2 card per baris */
+  }
+}
+
+/* Mobile: 1 per view */
+@media (max-width: 600px) {
+  .gallery-container figure {
+    flex: 0 0 90%; /* 1 card hampir full width */
+  }
+}
+    
+    .gallery-container {
+  scroll-snap-type: x mandatory;
+}
+
+.gallery-container figure {
+  scroll-snap-align: start;
+}
+
     </style>
 </head>
 <script type='text/javascript' src='//pl25360387.profitableratecpm.com/dd/2b/42/dd2b42b09a77c8efe6fdff35fbfbc733.js'></script>
@@ -185,6 +227,7 @@
     <header>
    <div class="logo">Videy+</div>
     </header>
+  
     <!-- Gallery 1 -->
   <h2>Trending Now</h2>
   <div class="gallery-wrapper">
@@ -304,13 +347,12 @@
                 <meta itemprop="uploadDate" content="2025-08-27" />
                 <link itemprop="contentUrl" href="https://ashvili99-byte.github.io/sLx7vw9k1.mp4/" /> <a href="https://ashvili99-byte.github.io/sLx7vw9k1.mp4/" class="video-link" aria-label="Watch video: This is the first time">Play</a>
             </figure>
-        </div>
-    <button class="nav-btn right" onclick="scrollGallery(this, 1)">&#10095;</button>
-  <div class="dots">
-    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+       </div>
+    <button class="nav-btn right" onclick="scrollGallery('gallery1', 1)">&#10095;</button>
+    <div class="dots" id="dots1"></div>
   </div>
-</div>
-    <!-- Gallery 2 -->
+  
+  <!-- Gallery 2 -->
   <h2>Recommended for You</h2>
   <div class="gallery-wrapper">
     <button class="nav-btn left" onclick="scrollGallery('gallery2', -1)">&#10094;</button>
@@ -442,33 +484,38 @@
                 <link itemprop="contentUrl" href="https://ashvili99-byte.github.io/XNWSxUBm1.mp4/" /> <a href="https://ashvili99-byte.github.io/XNWSxUBm1.mp4/" class="video-link" aria-label="Watch video: I'm in your dreams">Play</a>
             </figure>
       </div>
-        <button class="nav-btn right" onclick="scrollGallery(this, 1)">&#10095;</button>
-  <div class="dots">
-    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <button class="nav-btn right" onclick="scrollGallery('gallery2', 1)">&#10095;</button>
+    <div class="dots" id="dots2"></div>
   </div>
+  
+    <!-- Tombol NEXT -->
+<div style="text-align:center;">
+  <a href="https://moviereview20255.blogspot.com/" class="video-link next-page-button">NEXT</a>
 </div>
-    <div style="text-align:center;"> <a href="https://moviereview20255.blogspot.com/" class="video-link next-page-button">NEXT</a> </div>
-    <div style="text-align:center;">
-        <div style="height:100vh"></div>
-        <div class="reveal">
-            <h2>ADVERTISEMENT</h2>
-            <p>PLEASE CLICK ON THIS AD ONCE TO BUY COFFEE SO THAT IT MAKES ME MORE EXCITED ABOUT CREATING CONTENT.</p>
-        </div>
-        <script type="text/javascript">
-            atOptions = {
-                'key': '4a2fc598ebbbdbc95eb3bef73798c939',
-                'format': 'iframe',
-                'height': 50,
-                'width': 320,
-                'params': {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/4a2fc598ebbbdbc95eb3bef73798c939/invoke.js"></script>
-        <footer>
-            <p>&copy; 2025 Videy.co. All rights reserved.</p>
-        </footer>
-    </div>
-     <script>
+
+  <div style="text-align:center;">
+  <div style="height:100vh"></div>
+  <div class="reveal"><h2>ADVERTISEMENT</h2><p>PLEASE CLICK ON THIS AD ONCE TO BUY COFFEE SO THAT IT MAKES ME MORE EXCITED ABOUT CREATING CONTENT.</p></div>
+  <script type="text/javascript">
+
+<!-- Script Iklan -->
+<script type="text/javascript">
+  atOptions = {
+    'key' : '4a2fc598ebbbdbc95eb3bef73798c939',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/4a2fc598ebbbdbc95eb3bef73798c939/invoke.js"></script>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Videy.co. All rights reserved.</p>
+</footer>
+</div>
+ <script>
     function setupProgressDots(galleryId, dotsId, interval = 5000) {
       const gallery = document.getElementById(galleryId);
       const figures = gallery.querySelectorAll("figure");
