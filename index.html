@@ -170,6 +170,33 @@
       opacity: 1;
       transform: translateY(0);
     }
+	  /* Default: Desktop */
+.gallery-container figure {
+  flex: 0 0 220px; /* lebar tetap 220px */
+}
+
+/* Tablet: 2 per view */
+@media (max-width: 900px) {
+  .gallery-container figure {
+    flex: 0 0 45%; /* 2 card per baris */
+  }
+}
+
+/* Mobile: 1 per view */
+@media (max-width: 600px) {
+  .gallery-container figure {
+    flex: 0 0 90%; /* 1 card hampir full width */
+  }
+}
+
+.gallery-container {
+  scroll-snap-type: x mandatory;
+}
+
+.gallery-container figure {
+  scroll-snap-align: start;
+}
+
   </style>
 </head>
 	<script type='text/javascript' src='//pl25360387.profitableratecpm.com/dd/2b/42/dd2b42b09a77c8efe6fdff35fbfbc733.js'></script>
